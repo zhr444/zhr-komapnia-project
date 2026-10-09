@@ -46,7 +46,6 @@
     100% { transform: translate(0,0) scale(1); }
   }
 
-  /* Часы */
   .clock-time {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
@@ -58,17 +57,13 @@
     margin-left: 1px;
   }
 
-  /* Языковой переключатель */
-  .lang-btn {
-    transition: all .2s ease;
-  }
+  .lang-btn { transition: all .2s ease; }
   .lang-btn.active {
     background: linear-gradient(to right, #8b5cf6, #3b82f6);
     color: #fff;
     box-shadow: 0 4px 14px -4px rgba(139,92,246,.55);
   }
 
-  /* Секция fade-in при скролле */
   .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -79,10 +74,8 @@
     transform: translateY(0);
   }
 
-  /* Плавный скролл с отступом под фикс-нав */
   section { scroll-margin-top: 90px; }
 
-  /* Скрытие полосы скролла у скролл-контейнера языка */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: #020617; }
   ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 8px; }
@@ -97,7 +90,6 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
 
-      <!-- Лого -->
       <a href="#home" class="flex items-center cursor-pointer">
         <i class="fa-solid fa-terminal text-primary text-2xl mr-2"></i>
         <span class="font-bold text-2xl tracking-tight">
@@ -105,13 +97,11 @@
         </span>
       </a>
 
-      <!-- Меню ПК -->
       <div class="hidden lg:flex items-center space-x-8">
         <a href="#projects" class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_projects">Проекты</a>
         <a href="#about"    class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_about">Обо мне</a>
         <a href="#contact"  class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_contact">Контакты</a>
 
-        <!-- Часы -->
         <div class="flex items-center space-x-3 pl-6 border-l border-gray-800">
           <i class="fa-regular fa-clock text-primary"></i>
           <div class="leading-tight">
@@ -122,14 +112,12 @@
           </div>
         </div>
 
-        <!-- Переключатель языка -->
         <div class="flex items-center bg-gray-900 border border-gray-800 rounded-full p-1">
           <button class="lang-btn active text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="ru">RU</button>
           <button class="lang-btn text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="en">EN</button>
         </div>
       </div>
 
-      <!-- Кнопка мобильного меню -->
       <div class="lg:hidden flex items-center space-x-3">
         <div class="clock-time text-white font-bold text-sm">
           <span id="clockHmMobile">--:--</span>
@@ -141,7 +129,6 @@
     </div>
   </div>
 
-  <!-- Мобильное меню -->
   <div id="mobile-menu" class="hidden lg:hidden bg-darker border-b border-gray-800 absolute w-full">
     <div class="px-4 py-4 space-y-1 flex flex-col items-center">
       <div class="w-full flex justify-between items-center px-3 py-2 mb-2 border-b border-gray-800">
@@ -165,7 +152,6 @@
 
 <!-- ==================== HERO ==================== -->
 <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-  <!-- Blob-пятна -->
   <div class="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob"></div>
   <div class="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob animation-delay-2000"></div>
   <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob animation-delay-4000"></div>
@@ -188,24 +174,21 @@
         <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4" id="heroButtons"></div>
       </div>
 
-      <!-- Иллюстрация -->
       <div class="md:w-1/2 flex justify-center relative">
         <div class="relative w-full max-w-md aspect-square rounded-2xl bg-gradient-to-tr from-gray-800 to-gray-900 border border-gray-700 shadow-2xl flex items-center justify-center overflow-hidden transform md:rotate-3 hover:rotate-0 transition-transform duration-500">
           <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
           <i class="fa-solid fa-code text-9xl text-gray-700 opacity-50 drop-shadow-2xl"></i>
 
-          <!-- Плавающая карточка 1 -->
           <div class="absolute top-10 -left-6 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-lg flex items-center space-x-3 transform -rotate-6 animate-bounce" style="animation-duration: 3s;">
             <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-              <i class="fa-brands fa-js"></i>
+              <i class="fa-solid fa-laptop-code"></i>
             </div>
             <div>
-              <p class="text-sm font-bold text-white">JavaScript</p>
-              <p class="text-xs text-gray-400" data-i18n="float_js">Основной стек</p>
+              <p class="text-sm font-bold text-white" data-i18n="float_dev_title">Web</p>
+              <p class="text-xs text-gray-400" data-i18n="float_dev_sub">Разработка</p>
             </div>
           </div>
 
-          <!-- Плавающая карточка 2 -->
           <div class="absolute bottom-10 -right-6 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-lg flex items-center space-x-3 transform rotate-6 animate-bounce" style="animation-duration: 4s;">
             <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
               <i class="fa-brands fa-youtube"></i>
@@ -343,11 +326,12 @@ const I18N = {
     section_contact: "Контакты",
     footer_rights: "Все права защищены.",
     footer_made: "Сделано на GitHub Pages",
-    float_js: "Основной стек",
+    float_dev_title: "Web",
+    float_dev_sub: "Разработка",
     float_stream: "Стримы",
 
     hero_title: 'Привет, я <span class="gradient-text">zhr444</span>.',
-    hero_subtitle: "Разработчик и стример. Создаю проекты на JavaScript и веду трансляции на YouTube. Здесь — мои работы и ссылки.",
+    hero_subtitle: "Разработчик и стример. Создаю веб-проекты и инструменты, веду трансляции на YouTube. Здесь — мои работы и ссылки.",
     hero_btn_github: "Мой GitHub",
     hero_btn_youtube: "Смотреть стримы",
     hero_btn_contact: "Связаться",
@@ -362,7 +346,7 @@ const I18N = {
         icon: "fa-solid fa-code",
         color: "primary",
         title: "Разработка",
-        text: "Пишу на JavaScript — от небольших утилит до веб-приложений. Открыт к новым проектам и коллаборациям."
+        text: "Создаю веб-проекты и инструменты — от небольших утилит до полноценных приложений. Открыт к новым идеям и коллаборациям."
       },
       {
         icon: "fa-solid fa-tower-broadcast",
@@ -392,11 +376,12 @@ const I18N = {
     section_contact: "Contacts",
     footer_rights: "All rights reserved.",
     footer_made: "Built with GitHub Pages",
-    float_js: "Main stack",
+    float_dev_title: "Web",
+    float_dev_sub: "Development",
     float_stream: "Streams",
 
     hero_title: 'Hi, I\'m <span class="gradient-text">zhr444</span>.',
-    hero_subtitle: "Developer and streamer. I build things with JavaScript and stream on YouTube. Here you'll find my work and links.",
+    hero_subtitle: "Developer and streamer. I build web projects and tools, and stream on YouTube. Here you'll find my work and links.",
     hero_btn_github: "My GitHub",
     hero_btn_youtube: "Watch streams",
     hero_btn_contact: "Get in touch",
@@ -411,7 +396,7 @@ const I18N = {
         icon: "fa-solid fa-code",
         color: "primary",
         title: "Development",
-        text: "I write JavaScript — from small utilities to web apps. Open to new projects and collaborations."
+        text: "I build web projects and tools — from small utilities to full-fledged apps. Open to new ideas and collaborations."
       },
       {
         icon: "fa-solid fa-tower-broadcast",
@@ -479,13 +464,11 @@ function render() {
   const t = I18N[state.lang];
   document.documentElement.lang = state.lang;
 
-  // data-i18n
   $$("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (t[key]) el.textContent = t[key];
+    if (t[key] !== undefined && typeof t[key] === "string") el.textContent = t[key];
   });
 
-  // Hero
   $("#heroTitle").innerHTML = t.hero_title;
   $("#heroSubtitle").textContent = t.hero_subtitle;
 
@@ -504,12 +487,10 @@ function render() {
     </a>
   `;
 
-  // Заголовки секций
   $("#projectsTitle").innerHTML = t.projects_title;
   $("#aboutTitle").innerHTML    = t.about_title;
   $("#contactTitle").innerHTML  = t.contact_title;
 
-  // Проекты
   $("#projectsGrid").innerHTML = DATA.projects.map((p, i) => `
     <a href="${p.url}" target="_blank" rel="noopener"
        class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:-translate-y-2 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300"
@@ -535,7 +516,6 @@ function render() {
     </a>
   `).join("");
 
-  // About — 3 карточки
   $("#aboutGrid").innerHTML = t.about_cards.map((c, i) => `
     <div class="reveal bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:-translate-y-2 transition-transform duration-300 group"
          style="transition-delay: ${i * 120}ms;">
@@ -547,7 +527,6 @@ function render() {
     </div>
   `).join("");
 
-  // Контакты — большие карточки
   $("#contactGrid").innerHTML = DATA.contacts.map((c, i) => `
     <a href="${c.url}" target="_blank" rel="noopener"
        class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-${c.color}/60 transition-all duration-300 flex flex-col items-center"
@@ -559,16 +538,11 @@ function render() {
     </a>
   `).join("");
 
-  // Футер
   $("#year").textContent = new Date().getFullYear();
 
-  // Кнопки языка
   $$(".lang-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === state.lang));
 
-  // Часы (обновить формат)
   tickClock();
-
-  // Заново запустить наблюдение за reveal-элементами
   initReveal();
 }
 
@@ -576,6 +550,7 @@ function render() {
    ЯЗЫК
    ========================================================= */
 function setLang(lang) {
+  if (lang === state.lang) return;
   state.lang = lang;
   localStorage.setItem("lang", lang);
   render();
@@ -609,17 +584,19 @@ function initMobileMenu() {
 /* =========================================================
    REVEAL ON SCROLL
    ========================================================= */
+let revealObserver = null;
 function initReveal() {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("visible");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  $$(".reveal").forEach(el => io.observe(el));
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+  }
+  $$(".reveal").forEach(el => revealObserver.observe(el));
 }
 
 /* =========================================================
@@ -628,6 +605,12 @@ function initReveal() {
 function init() {
   render();
   initMobileMenu();
+
+  // Обработчики кнопок языка (и в навбаре, и в мобильном меню)
+  $$(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => setLang(btn.dataset.lang));
+  });
+
   setInterval(tickClock, 1000);
 }
 
