@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zhr444 | Портфолио</title>
+<meta name="description" content="Портфолио zhr444 — проекты, стримы и контакты">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          primary:   '#8b5cf6',
+          secondary: '#3b82f6',
+          dark:      '#0f172a',
+          darker:    '#020617',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #020617;
+    color: #f8fafc;
+  }
+  .gradient-text {
+    background: linear-gradient(to right, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .blob { animation: blob 7s infinite; }
+  .animation-delay-2000 { animation-delay: 2s; }
+  .animation-delay-4000 { animation-delay: 4s; }
+  @keyframes blob {
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(30px,-50px) scale(1.1); }
+    66%  { transform: translate(-20px,20px) scale(0.9); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+
+  /* Часы */
+  .clock-time {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+  }
+  .clock-time .sec {
+    font-size: 0.62em;
+    color: #8b5cf6;
+    margin-left: 1px;
+  }
+
+  /* Языковой переключатель */
+  .lang-btn {
+    transition: all .2s ease;
+  }
+  .lang-btn.active {
+    background: linear-gradient(to right, #8b5cf6, #3b82f6);
+    color: #fff;
+    box-shadow: 0 4px 14px -4px rgba(139,92,246,.55);
+  }
+
+  /* Секция fade-in при скролле */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Плавный скролл с отступом под фикс-нав */
+  section { scroll-margin-top: 90px; }
+
+  /* Скрытие полосы скролла у скролл-контейнера языка */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #020617; }
+  ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #334155; }
+</style>
+</head>
+
+<body class="antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+
+<!-- ==================== NAV ==================== -->
+<nav class="fixed w-full z-50 top-0 backdrop-blur-md bg-dark/80 border-b border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+
+      <!-- Лого -->
+      <a href="#home" class="flex items-center cursor-pointer">
+        <i class="fa-solid fa-terminal text-primary text-2xl mr-2"></i>
+        <span class="font-bold text-2xl tracking-tight">
+          <span class="gradient-text">zhr</span>444
+        </span>
+      </a>
+
+      <!-- Меню ПК -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="#projects" class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_projects">Проекты</a>
+        <a href="#about"    class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_about">Обо мне</a>
+        <a href="#contact"  class="text-gray-300 hover:text-white transition-colors" data-i18n="nav_contact">Контакты</a>
+
+        <!-- Часы -->
+        <div class="flex items-center space-x-3 pl-6 border-l border-gray-800">
+          <i class="fa-regular fa-clock text-primary"></i>
+          <div class="leading-tight">
+            <div class="clock-time text-white font-bold text-base">
+              <span id="clockHm">--:--</span><span class="sec" id="clockSec">:--</span>
+            </div>
+            <div class="text-[11px] text-gray-500" id="clockDate">—</div>
+          </div>
+        </div>
+
+        <!-- Переключатель языка -->
+        <div class="flex items-center bg-gray-900 border border-gray-800 rounded-full p-1">
+          <button class="lang-btn active text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="ru">RU</button>
+          <button class="lang-btn text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="en">EN</button>
+        </div>
+      </div>
+
+      <!-- Кнопка мобильного меню -->
+      <div class="lg:hidden flex items-center space-x-3">
+        <div class="clock-time text-white font-bold text-sm">
+          <span id="clockHmMobile">--:--</span>
+        </div>
+        <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Мобильное меню -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-darker border-b border-gray-800 absolute w-full">
+    <div class="px-4 py-4 space-y-1 flex flex-col items-center">
+      <div class="w-full flex justify-between items-center px-3 py-2 mb-2 border-b border-gray-800">
+        <div class="leading-tight">
+          <div class="clock-time text-white font-bold text-base">
+            <span id="clockHmMobile2">--:--</span><span class="sec" id="clockSecMobile">:--</span>
+          </div>
+          <div class="text-[11px] text-gray-500" id="clockDateMobile">—</div>
+        </div>
+        <div class="flex items-center bg-gray-900 border border-gray-800 rounded-full p-1">
+          <button class="lang-btn active text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="ru">RU</button>
+          <button class="lang-btn text-xs font-bold px-3 py-1 rounded-full text-gray-400" data-lang="en">EN</button>
+        </div>
+      </div>
+      <a href="#projects" class="mobile-link text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-center" data-i18n="nav_projects">Проекты</a>
+      <a href="#about"    class="mobile-link text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-center" data-i18n="nav_about">Обо мне</a>
+      <a href="#contact"  class="mobile-link text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-center" data-i18n="nav_contact">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+  <!-- Blob-пятна -->
+  <div class="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob"></div>
+  <div class="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob animation-delay-2000"></div>
+  <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 blob animation-delay-4000"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    <div class="text-center md:text-left md:flex items-center justify-between gap-12">
+
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-gray-700 bg-gray-800/50 text-sm font-semibold text-gray-300 mb-6 backdrop-blur-sm">
+          <span class="flex items-center">
+            <span class="w-2 h-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
+            <span data-i18n="status">Открыт к проектам</span>
+          </span>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight" id="heroTitle"></h1>
+
+        <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto md:mx-0" id="heroSubtitle"></p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4" id="heroButtons"></div>
+      </div>
+
+      <!-- Иллюстрация -->
+      <div class="md:w-1/2 flex justify-center relative">
+        <div class="relative w-full max-w-md aspect-square rounded-2xl bg-gradient-to-tr from-gray-800 to-gray-900 border border-gray-700 shadow-2xl flex items-center justify-center overflow-hidden transform md:rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+          <i class="fa-solid fa-code text-9xl text-gray-700 opacity-50 drop-shadow-2xl"></i>
+
+          <!-- Плавающая карточка 1 -->
+          <div class="absolute top-10 -left-6 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-lg flex items-center space-x-3 transform -rotate-6 animate-bounce" style="animation-duration: 3s;">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+              <i class="fa-brands fa-js"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white">JavaScript</p>
+              <p class="text-xs text-gray-400" data-i18n="float_js">Основной стек</p>
+            </div>
+          </div>
+
+          <!-- Плавающая карточка 2 -->
+          <div class="absolute bottom-10 -right-6 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-lg flex items-center space-x-3 transform rotate-6 animate-bounce" style="animation-duration: 4s;">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white">YouTube</p>
+              <p class="text-xs text-gray-400" data-i18n="float_stream">Стримы</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects" class="py-24 bg-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <div class="inline-flex items-center text-primary font-semibold text-sm uppercase tracking-widest mb-4">
+        <i class="fa-solid fa-cube mr-2"></i><span data-i18n="section_projects">Проекты</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-6" id="projectsTitle"></h2>
+      <p class="text-gray-400 text-lg" data-i18n="projects_subtitle">Открытые исходники, инструменты и эксперименты.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="py-24 relative overflow-hidden">
+  <div class="absolute top-1/3 -right-20 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-10 blob"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <div class="inline-flex items-center text-secondary font-semibold text-sm uppercase tracking-widest mb-4">
+        <i class="fa-regular fa-user mr-2"></i><span data-i18n="section_about">Обо мне</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-6" id="aboutTitle"></h2>
+      <p class="text-gray-400 text-lg" data-i18n="about_subtitle">Немного о том, чем я занимаюсь.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="aboutGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+  <div class="absolute top-0 left-1/4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 blob"></div>
+
+  <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+    <div class="inline-flex items-center text-primary font-semibold text-sm uppercase tracking-widest mb-4">
+      <i class="fa-regular fa-paper-plane mr-2"></i><span data-i18n="section_contact">Контакты</span>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8" id="contactTitle"></h2>
+    <p class="text-xl text-gray-400 mb-12" data-i18n="contact_subtitle">Найди меня на этих платформах.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" id="contactGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-darker border-t border-gray-900 pt-16 pb-8 text-gray-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="flex items-center mb-4 md:mb-0">
+        <i class="fa-solid fa-terminal text-primary text-2xl mr-2"></i>
+        <span class="font-bold text-xl text-white"><span class="gradient-text">zhr</span>444</span>
+      </div>
+
+      <div class="flex space-x-6 mb-4 md:mb-0">
+        <a href="https://github.com/zhr444" class="hover:text-white transition-colors" aria-label="GitHub"><i class="fa-brands fa-github text-xl"></i></a>
+        <a href="https://vk.ru/zhr_blog" class="hover:text-white transition-colors" aria-label="VK"><i class="fa-brands fa-vk text-xl"></i></a>
+        <a href="https://youtube.com/@zhr-444" class="hover:text-white transition-colors" aria-label="YouTube"><i class="fa-brands fa-youtube text-xl"></i></a>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-gray-900 text-center md:text-left text-sm flex flex-col md:flex-row justify-between">
+      <p>© <span id="year"></span> zhr444. <span data-i18n="footer_rights">Все права защищены.</span></p>
+      <div class="mt-4 md:mt-0">
+        <span data-i18n="footer_made">Сделано на GitHub Pages</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   ДАННЫЕ
+   ========================================================= */
+const DATA = {
+  name: "zhr444",
+  github: "zhr444",
+
+  projects: [
+    { name: "DiaLog", url: "https://github.com/zhr444/DiaLog", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Веб-приложение для ведения диалогов и логов.", en: "Web app for keeping dialogues and logs." } },
+    { name: "password-generator", url: "https://github.com/zhr444/password-generator", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Генератор паролей с настройками сложности.", en: "Password generator with complexity options." } },
+    { name: "stream-pomodoro", url: "https://github.com/zhr444/stream-pomodoro", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Помодоро-таймер для стримов.", en: "Pomodoro timer for streams." } },
+    { name: "Format_Converter", url: "https://github.com/zhr444/Format_Converter", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Конвертер форматов файлов.", en: "File format converter." } },
+    { name: "Task-Tracker", url: "https://github.com/zhr444/Task-Tracker", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Трекер задач для повседневного использования.", en: "Task tracker for everyday use." } },
+    { name: "retro-hub", url: "https://github.com/zhr444/retro-hub", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Хаб в ретро-стиле.", en: "Retro-styled hub." } },
+    { name: "todo-list", url: "https://github.com/zhr444/todo-list", language: "JavaScript", languageColor: "#f1e05a", stars: 0,
+      description: { ru: "Простой список задач.", en: "Simple to-do list." } },
+    { name: "The-development-simulator", url: "https://github.com/zhr444/The-development-simulator", language: "HTML", languageColor: "#e34c26", stars: 0,
+      description: { ru: "Симулятор процесса разработки.", en: "A development process simulator." } },
+  ],
+
+  contacts: [
+    { name: "GitHub",    url: "https://github.com/zhr444",    icon: "fa-brands fa-github",  color: "primary"   },
+    { name: "ВКонтакте", url: "https://vk.ru/zhr_blog",       icon: "fa-brands fa-vk",      color: "secondary" },
+    { name: "YouTube",   url: "https://youtube.com/@zhr-444", icon: "fa-brands fa-youtube", color: "red"       },
+  ],
+};
+
+/* =========================================================
+   ПЕРЕВОДЫ
+   ========================================================= */
+const I18N = {
+  ru: {
+    status: "Открыт к проектам",
+    nav_projects: "Проекты",
+    nav_about: "Обо мне",
+    nav_contact: "Контакты",
+    section_projects: "Проекты",
+    section_about: "Обо мне",
+    section_contact: "Контакты",
+    footer_rights: "Все права защищены.",
+    footer_made: "Сделано на GitHub Pages",
+    float_js: "Основной стек",
+    float_stream: "Стримы",
+
+    hero_title: 'Привет, я <span class="gradient-text">zhr444</span>.',
+    hero_subtitle: "Разработчик и стример. Создаю проекты на JavaScript и веду трансляции на YouTube. Здесь — мои работы и ссылки.",
+    hero_btn_github: "Мой GitHub",
+    hero_btn_youtube: "Смотреть стримы",
+    hero_btn_contact: "Связаться",
+
+    projects_title: 'Мои <span class="gradient-text">проекты</span>',
+    projects_subtitle: "Открытые исходники, инструменты и эксперименты.",
+
+    about_title: 'Немного <span class="gradient-text">обо мне</span>',
+    about_subtitle: "Немного о том, чем я занимаюсь.",
+    about_cards: [
+      {
+        icon: "fa-solid fa-code",
+        color: "primary",
+        title: "Разработка",
+        text: "Пишу на JavaScript — от небольших утилит до веб-приложений. Открыт к новым проектам и коллаборациям."
+      },
+      {
+        icon: "fa-solid fa-tower-broadcast",
+        color: "secondary",
+        title: "Стримы",
+        text: "Веду трансляции на YouTube: Minecraft (битвы строителей, bed wars, murder mystery) и другие игры."
+      },
+      {
+        icon: "fa-solid fa-handshake",
+        color: "pink-500",
+        title: "Сотрудничество",
+        text: "Открыт к сотрудничеству и новым идеям. Связаться можно через ВКонтакте или GitHub."
+      },
+    ],
+
+    contact_title: 'Давай <span class="gradient-text">свяжемся</span>',
+    contact_subtitle: "Найди меня на этих платформах.",
+  },
+
+  en: {
+    status: "Open to projects",
+    nav_projects: "Projects",
+    nav_about: "About",
+    nav_contact: "Contacts",
+    section_projects: "Projects",
+    section_about: "About",
+    section_contact: "Contacts",
+    footer_rights: "All rights reserved.",
+    footer_made: "Built with GitHub Pages",
+    float_js: "Main stack",
+    float_stream: "Streams",
+
+    hero_title: 'Hi, I\'m <span class="gradient-text">zhr444</span>.',
+    hero_subtitle: "Developer and streamer. I build things with JavaScript and stream on YouTube. Here you'll find my work and links.",
+    hero_btn_github: "My GitHub",
+    hero_btn_youtube: "Watch streams",
+    hero_btn_contact: "Get in touch",
+
+    projects_title: 'My <span class="gradient-text">projects</span>',
+    projects_subtitle: "Open source, tools and experiments.",
+
+    about_title: 'A bit <span class="gradient-text">about me</span>',
+    about_subtitle: "A short intro about what I do.",
+    about_cards: [
+      {
+        icon: "fa-solid fa-code",
+        color: "primary",
+        title: "Development",
+        text: "I write JavaScript — from small utilities to web apps. Open to new projects and collaborations."
+      },
+      {
+        icon: "fa-solid fa-tower-broadcast",
+        color: "secondary",
+        title: "Streams",
+        text: "I stream on YouTube: Minecraft (build battles, bed wars, murder mystery) and other games."
+      },
+      {
+        icon: "fa-solid fa-handshake",
+        color: "pink-500",
+        title: "Collaboration",
+        text: "Open to collaboration and new ideas. Reach me on VK or GitHub."
+      },
+    ],
+
+    contact_title: 'Let\'s <span class="gradient-text">get in touch</span>',
+    contact_subtitle: "Find me on these platforms.",
+  },
+};
+
+/* =========================================================
+   СОСТОЯНИЕ
+   ========================================================= */
+const state = {
+  lang: localStorage.getItem("lang")
+    || (navigator.language && navigator.language.startsWith("ru") ? "ru" : "en"),
+};
+
+const $  = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+
+/* =========================================================
+   ЧАСЫ
+   ========================================================= */
+function tickClock() {
+  const now = new Date();
+  const locale = state.lang === "ru" ? "ru-RU" : "en-US";
+
+  const hh = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+
+  const timeHm = `${hh}:${mm}`;
+  const timeSec = `:${ss}`;
+
+  ["#clockHm", "#clockHmMobile", "#clockHmMobile2"].forEach(sel => {
+    const el = $(sel); if (el) el.textContent = timeHm;
+  });
+  ["#clockSec", "#clockSecMobile"].forEach(sel => {
+    const el = $(sel); if (el) el.textContent = timeSec;
+  });
+
+  const dateStr = now.toLocaleDateString(locale, {
+    weekday: "short", day: "numeric", month: "short", year: "numeric"
+  });
+  ["#clockDate", "#clockDateMobile"].forEach(sel => {
+    const el = $(sel); if (el) el.textContent = dateStr;
+  });
+}
+
+/* =========================================================
+   РЕНДЕР
+   ========================================================= */
+function render() {
+  const t = I18N[state.lang];
+  document.documentElement.lang = state.lang;
+
+  // data-i18n
+  $$("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key]) el.textContent = t[key];
+  });
+
+  // Hero
+  $("#heroTitle").innerHTML = t.hero_title;
+  $("#heroSubtitle").textContent = t.hero_subtitle;
+
+  $("#heroButtons").innerHTML = `
+    <a href="https://github.com/${DATA.github}" target="_blank" rel="noopener"
+       class="w-full sm:w-auto bg-primary hover:bg-violet-600 text-white px-8 py-4 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30 text-center flex items-center justify-center">
+      <i class="fa-brands fa-github mr-2"></i>${t.hero_btn_github}
+    </a>
+    <a href="https://youtube.com/@zhr-444" target="_blank" rel="noopener"
+       class="w-full sm:w-auto bg-transparent border border-gray-600 hover:border-gray-400 text-white px-8 py-4 rounded-full font-bold transition-all hover:bg-gray-800 text-center flex items-center justify-center">
+      <i class="fa-brands fa-youtube mr-2"></i>${t.hero_btn_youtube}
+    </a>
+    <a href="#contact"
+       class="w-full sm:w-auto bg-transparent border border-gray-600 hover:border-gray-400 text-white px-8 py-4 rounded-full font-bold transition-all hover:bg-gray-800 text-center flex items-center justify-center">
+      <i class="fa-regular fa-paper-plane mr-2"></i>${t.hero_btn_contact}
+    </a>
+  `;
+
+  // Заголовки секций
+  $("#projectsTitle").innerHTML = t.projects_title;
+  $("#aboutTitle").innerHTML    = t.about_title;
+  $("#contactTitle").innerHTML  = t.contact_title;
+
+  // Проекты
+  $("#projectsGrid").innerHTML = DATA.projects.map((p, i) => `
+    <a href="${p.url}" target="_blank" rel="noopener"
+       class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:-translate-y-2 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300"
+       style="transition-delay: ${i * 60}ms;">
+
+      <div class="flex items-start justify-between mb-5">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+          <i class="fa-solid fa-folder-open text-xl text-primary group-hover:text-white transition-colors duration-300"></i>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square text-gray-600 group-hover:text-primary transition-colors duration-300"></i>
+      </div>
+
+      <h3 class="text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors break-all">${p.name}</h3>
+      <p class="text-gray-400 text-sm leading-relaxed mb-5 min-h-[48px]">${p.description[state.lang] || p.description.ru}</p>
+
+      <div class="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-800">
+        <span class="flex items-center">
+          <span class="w-2.5 h-2.5 rounded-full mr-2" style="background:${p.languageColor}"></span>
+          ${p.language}
+        </span>
+        <span class="flex items-center"><i class="fa-regular fa-star mr-1 text-yellow-500"></i>${p.stars}</span>
+      </div>
+    </a>
+  `).join("");
+
+  // About — 3 карточки
+  $("#aboutGrid").innerHTML = t.about_cards.map((c, i) => `
+    <div class="reveal bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:-translate-y-2 transition-transform duration-300 group"
+         style="transition-delay: ${i * 120}ms;">
+      <div class="w-14 h-14 rounded-xl bg-${c.color}/10 flex items-center justify-center mb-6 group-hover:bg-${c.color} transition-colors duration-300">
+        <i class="${c.icon} text-2xl text-${c.color} group-hover:text-white transition-colors duration-300"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-4 text-white">${c.title}</h3>
+      <p class="text-gray-400 leading-relaxed">${c.text}</p>
+    </div>
+  `).join("");
+
+  // Контакты — большие карточки
+  $("#contactGrid").innerHTML = DATA.contacts.map((c, i) => `
+    <a href="${c.url}" target="_blank" rel="noopener"
+       class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-${c.color}/60 transition-all duration-300 flex flex-col items-center"
+       style="transition-delay: ${i * 100}ms;">
+      <div class="w-14 h-14 rounded-xl bg-${c.color}/10 flex items-center justify-center mb-4 group-hover:bg-${c.color} transition-colors duration-300">
+        <i class="${c.icon} text-2xl text-${c.color} group-hover:text-white transition-colors duration-300"></i>
+      </div>
+      <div class="text-white font-bold group-hover:text-${c.color} transition-colors">${c.name}</div>
+    </a>
+  `).join("");
+
+  // Футер
+  $("#year").textContent = new Date().getFullYear();
+
+  // Кнопки языка
+  $$(".lang-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === state.lang));
+
+  // Часы (обновить формат)
+  tickClock();
+
+  // Заново запустить наблюдение за reveal-элементами
+  initReveal();
+}
+
+/* =========================================================
+   ЯЗЫК
+   ========================================================= */
+function setLang(lang) {
+  state.lang = lang;
+  localStorage.setItem("lang", lang);
+  render();
+}
+
+/* =========================================================
+   МОБИЛЬНОЕ МЕНЮ
+   ========================================================= */
+function initMobileMenu() {
+  const btn  = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const icon = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-xmark');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-xmark');
+      }
+    });
+  });
+}
+
+/* =========================================================
+   REVEAL ON SCROLL
+   ========================================================= */
+function initReveal() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  $$(".reveal").forEach(el => io.observe(el));
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+function init() {
+  render();
+  initMobileMenu();
+  setInterval(tickClock, 1000);
+}
+
+init();
+</script>
+</body>
+</html>
