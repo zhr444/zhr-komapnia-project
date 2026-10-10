@@ -184,7 +184,7 @@
               <i class="fa-solid fa-laptop-code"></i>
             </div>
             <div>
-              <p class="text-sm font-bold text-white" data-i18n="float_dev_title">Web</p>
+              <p class="text-sm font-bold text-white">Web</p>
               <p class="text-xs text-gray-400" data-i18n="float_dev_sub">Разработка</p>
             </div>
           </div>
@@ -281,34 +281,84 @@
 <script>
 /* =========================================================
    ДАННЫЕ
+   ---------------------------------------------------------
+   Поле "site" — ссылка на живой сайт проекта (GitHub Pages).
+   Если сайта нет — оставь null, и кнопка «Демо» не появится.
    ========================================================= */
 const DATA = {
   name: "zhr444",
   github: "zhr444",
 
   projects: [
-    { name: "DiaLog", url: "https://github.com/zhr444/DiaLog", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Веб-приложение для ведения диалогов и логов.", en: "Web app for keeping dialogues and logs." } },
-    { name: "password-generator", url: "https://github.com/zhr444/password-generator", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Генератор паролей с настройками сложности.", en: "Password generator with complexity options." } },
-    { name: "stream-pomodoro", url: "https://github.com/zhr444/stream-pomodoro", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Помодоро-таймер для стримов.", en: "Pomodoro timer for streams." } },
-    { name: "Format_Converter", url: "https://github.com/zhr444/Format_Converter", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Конвертер форматов файлов.", en: "File format converter." } },
-    { name: "Task-Tracker", url: "https://github.com/zhr444/Task-Tracker", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Трекер задач для повседневного использования.", en: "Task tracker for everyday use." } },
-    { name: "retro-hub", url: "https://github.com/zhr444/retro-hub", language: "JavaScript", languageColor: "#f1e05a", stars: 1,
-      description: { ru: "Хаб в ретро-стиле.", en: "Retro-styled hub." } },
-    { name: "todo-list", url: "https://github.com/zhr444/todo-list", language: "JavaScript", languageColor: "#f1e05a", stars: 0,
-      description: { ru: "Простой список задач.", en: "Simple to-do list." } },
-    { name: "The-development-simulator", url: "https://github.com/zhr444/The-development-simulator", language: "HTML", languageColor: "#e34c26", stars: 0,
-      description: { ru: "Симулятор процесса разработки.", en: "A development process simulator." } },
+    {
+      name: "DiaLog",
+      url: "https://github.com/zhr444/DiaLog",
+      site: null,
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Веб-приложение для ведения диалогов и логов.", en: "Web app for keeping dialogues and logs." }
+    },
+    {
+      name: "password-generator",
+      url: "https://github.com/zhr444/password-generator",
+      site: "https://zhr444.github.io/password-generator/",
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Генератор паролей с настройками сложности.", en: "Password generator with complexity options." }
+    },
+    {
+      name: "stream-pomodoro",
+      url: "https://github.com/zhr444/stream-pomodoro",
+      site: "https://zhr444.github.io/stream-pomodoro/",
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Помодоро-таймер для стримов.", en: "Pomodoro timer for streams." }
+    },
+    {
+      name: "Format_Converter",
+      url: "https://github.com/zhr444/Format_Converter",
+      site: null,
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Конвертер форматов файлов.", en: "File format converter." }
+    },
+    {
+      name: "Task-Tracker",
+      url: "https://github.com/zhr444/Task-Tracker",
+      site: "https://zhr444.github.io/Task-Tracker/",
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Трекер задач для повседневного использования.", en: "Task tracker for everyday use." }
+    },
+    {
+      name: "retro-hub",
+      url: "https://github.com/zhr444/retro-hub",
+      site: "https://zhr444.github.io/retro-hub/",
+      language: "JavaScript", languageColor: "#f1e05a", stars: 1,
+      description: { ru: "Хаб в ретро-стиле.", en: "Retro-styled hub." }
+    },
+    {
+      name: "todo-list",
+      url: "https://github.com/zhr444/todo-list",
+      site: "https://zhr444.github.io/todo-list/",
+      language: "JavaScript", languageColor: "#f1e05a", stars: 0,
+      description: { ru: "Простой список задач.", en: "Simple to-do list." }
+    },
+    {
+      name: "The-development-simulator",
+      url: "https://github.com/zhr444/The-development-simulator",
+      site: "https://zhr444.github.io/The-development-simulator/",
+      language: "HTML", languageColor: "#e34c26", stars: 0,
+      description: { ru: "Симулятор процесса разработки.", en: "A development process simulator." }
+    },
+    {
+      name: "website-project-github.io",
+      url: "https://github.com/zhr444/website-project-github.io",
+      site: "https://zhr444.github.io/website-project-github.io/",
+      language: "HTML", languageColor: "#e34c26", stars: 0,
+      description: { ru: "Учебный веб-проект, опубликованный на GitHub Pages.", en: "A learning web project published on GitHub Pages." }
+    },
   ],
 
   contacts: [
     { name: "GitHub",    url: "https://github.com/zhr444",    icon: "fa-brands fa-github",  color: "primary"   },
     { name: "ВКонтакте", url: "https://vk.ru/zhr_blog",       icon: "fa-brands fa-vk",      color: "secondary" },
-    { name: "YouTube",   url: "https://youtube.com/@zhr-444", icon: "fa-brands fa-youtube", color: "red"       },
+    { name: "YouTube",   url: "https://youtube.com/@zhr-444", icon: "fa-brands fa-youtube", color: "red-500"   },
   ],
 };
 
@@ -326,7 +376,6 @@ const I18N = {
     section_contact: "Контакты",
     footer_rights: "Все права защищены.",
     footer_made: "Сделано на GitHub Pages",
-    float_dev_title: "Web",
     float_dev_sub: "Разработка",
     float_stream: "Стримы",
 
@@ -338,6 +387,9 @@ const I18N = {
 
     projects_title: 'Мои <span class="gradient-text">проекты</span>',
     projects_subtitle: "Открытые исходники, инструменты и эксперименты.",
+
+    btn_code: "Код",
+    btn_demo: "Демо",
 
     about_title: 'Немного <span class="gradient-text">обо мне</span>',
     about_subtitle: "Немного о том, чем я занимаюсь.",
@@ -376,7 +428,6 @@ const I18N = {
     section_contact: "Contacts",
     footer_rights: "All rights reserved.",
     footer_made: "Built with GitHub Pages",
-    float_dev_title: "Web",
     float_dev_sub: "Development",
     float_stream: "Streams",
 
@@ -388,6 +439,9 @@ const I18N = {
 
     projects_title: 'My <span class="gradient-text">projects</span>',
     projects_subtitle: "Open source, tools and experiments.",
+
+    btn_code: "Code",
+    btn_demo: "Demo",
 
     about_title: 'A bit <span class="gradient-text">about me</span>',
     about_subtitle: "A short intro about what I do.",
@@ -439,7 +493,7 @@ function tickClock() {
   const mm = String(now.getMinutes()).padStart(2, "0");
   const ss = String(now.getSeconds()).padStart(2, "0");
 
-  const timeHm = `${hh}:${mm}`;
+  const timeHm  = `${hh}:${mm}`;
   const timeSec = `:${ss}`;
 
   ["#clockHm", "#clockHmMobile", "#clockHmMobile2"].forEach(sel => {
@@ -491,30 +545,48 @@ function render() {
   $("#aboutTitle").innerHTML    = t.about_title;
   $("#contactTitle").innerHTML  = t.contact_title;
 
-  $("#projectsGrid").innerHTML = DATA.projects.map((p, i) => `
-    <a href="${p.url}" target="_blank" rel="noopener"
-       class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:-translate-y-2 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300"
-       style="transition-delay: ${i * 60}ms;">
+  // Проекты — карточка с двумя кнопками (Код / Демо)
+  $("#projectsGrid").innerHTML = DATA.projects.map((p, i) => {
+    const hasSite = !!p.site;
+    return `
+    <div class="reveal group bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:-translate-y-2 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 flex flex-col"
+         style="transition-delay: ${i * 60}ms;">
 
       <div class="flex items-start justify-between mb-5">
         <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
           <i class="fa-solid fa-folder-open text-xl text-primary group-hover:text-white transition-colors duration-300"></i>
         </div>
-        <i class="fa-solid fa-arrow-up-right-from-square text-gray-600 group-hover:text-primary transition-colors duration-300"></i>
+        ${hasSite ? `<span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/30">
+          <i class="fa-solid fa-circle text-[6px] mr-1 align-middle"></i>live
+        </span>` : ""}
       </div>
 
-      <h3 class="text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors break-all">${p.name}</h3>
-      <p class="text-gray-400 text-sm leading-relaxed mb-5 min-h-[48px]">${p.description[state.lang] || p.description.ru}</p>
+      <h3 class="text-lg font-bold mb-2 text-white break-all">${p.name}</h3>
+      <p class="text-gray-400 text-sm leading-relaxed mb-5 flex-1">${p.description[state.lang] || p.description.ru}</p>
 
-      <div class="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-800">
+      <div class="flex items-center justify-between text-xs text-gray-500 pb-4 border-b border-gray-800">
         <span class="flex items-center">
           <span class="w-2.5 h-2.5 rounded-full mr-2" style="background:${p.languageColor}"></span>
           ${p.language}
         </span>
         <span class="flex items-center"><i class="fa-regular fa-star mr-1 text-yellow-500"></i>${p.stars}</span>
       </div>
-    </a>
-  `).join("");
+
+      <div class="flex items-center gap-2 pt-4">
+        <a href="${p.url}" target="_blank" rel="noopener"
+           class="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-lg border border-gray-700 text-gray-300 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all">
+          <i class="fa-brands fa-github mr-2"></i>${t.btn_code}
+        </a>
+        ${hasSite ? `
+          <a href="${p.site}" target="_blank" rel="noopener"
+             class="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+            <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>${t.btn_demo}
+          </a>
+        ` : ""}
+      </div>
+    </div>
+    `;
+  }).join("");
 
   $("#aboutGrid").innerHTML = t.about_cards.map((c, i) => `
     <div class="reveal bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:-translate-y-2 transition-transform duration-300 group"
@@ -606,7 +678,6 @@ function init() {
   render();
   initMobileMenu();
 
-  // Обработчики кнопок языка (и в навбаре, и в мобильном меню)
   $$(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => setLang(btn.dataset.lang));
   });
